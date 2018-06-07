@@ -1,0 +1,125 @@
+' Buffer a point within a polygon constraint, AVENUE for ArcView 3.x'
+'Distributed with permission of William Hubert , author '
+
+' SELF: {
+' ptOrigin: Center of buffer
+' xArea: Area of buffer
+' plyRegion: Polygon in which buffer must lie. ' }
+'
+' Returns: plyBuffer (Null upon failure). '
+' Comments:
+' All calculations are Euclidean. Project the features
+' before calling this script (or pass a projection to this script and
+' and unprojecting on the fly).
+'================================================================'
+ptOrigin = SELF.Get(0)
+xAreaTarget = SELF.Get(1).Abs
+plyRegion = SELF.Get(2)
+'
+' Search parameters.
+'
+xTolerance = 0.0001 ' Relative precision needed for radius.
+xAreaTolerance = 0.000001 ' Relative precision needed for area.
+nIterMax = 40 ' Limit to the iterations.
+nGons = 360 
+' Shape of a "circle" 
+xAreaUnitCircle =(Number.GetPi * 2 / nGons).Sin * nGons / 2 '
+' Default to usual buffer when there's no constraint. '
+if (plyRegion.IsNull) then
+return Circle.Make(ptOrigin,(xAreaTarget / xAreaUnitCircle).Sqrt).AsPolygon
+end
+'
+' (You would project plyRegion at this point if projecting on the fly.)
+'
+' Establish an upper limit of search. '
+plyBuffer = Polygon.MakeNull
+xAreaHigh = plyRegion.ReturnArea
+if (xAreaHigh < xAreaTarget) then
+return plyBuffer
+end
+'
+' Find greatest distance between ptOrigin and plyRegion '(approximately; it's OK to overestimate).
+'
+rctExtent = plyRegion.ReturnExtent
+lPtExtent = rctExtent.AsPolygon.AsList.Get(0) xRadiusHigh = 0
+for each ptVertex in lPtExtent
+xDistance = ptOrigin.Distance(ptVertex) if (xDistance > xRadiusHigh)
+then
+xRadiusHigh = xDistance
+end
+end
+'
+' Establish a lower limit of search. '
+xRadiusLow = (xAreaTarget / xAreaUnitCircle).Sqrt xAreaLow =
+xAreaTarget
+'
+' Establish the initial estimate.
+'
+xRadius = xRadiusLow
+'
+'==> DEBUGGING
+'
+s = "Target area:" ++ xAreaTarget.AsString s = s + NL +
+"Iteration, radiusLow, areaLow, radius, area, radiusHigh, areaHigh"
+'
+' Search for the buffer.
+'
+nIter = 0
+while (nIter < nIterMax)
+nIter = 1 + nIter
+'
+' Compute area of current estimate.
+'
+plyCircle = Circle.Make(ptOrigin, xRadius).AsPolygon plyBuffer =
+plyRegion.ReturnIntersection(plyCircle) xArea = plyBuffer.ReturnArea
+if (xArea.IsNull) then xArea = 0 end '
+'==> DEBUGGING
+'
+s = s + NL + NL + niter.AsString ++
+xRadiusLow.AsString ++ xAreaLow.AsString ++ xRadius.AsString ++
+xArea.AsString ++ xRadiusHigh.AsString ++ xAreaHigh.AsString '
+' Check for termination.
+'
+if ((xRadiusHigh - xRadiusLow)/(xRadiusHigh + xRadiusLow)
+<= xTolerance) then
+break
+end
+if (((xArea - xAreaTarget)/(xArea + xAreaTarget)).Abs
+<= xAreaTolerance) then
+break
+end
+'
+' Update the estimate range [xRadiusLow, xRadiusHigh] '
+if (xArea > xAreaTarget) then
+xAreaHigh = xArea
+xRadiusHigh = xRadius
+else
+xAreaLow = xArea
+xRadiusLow = xRadius
+end
+'
+' Use linear interpolation to estimate the next radius. '
+xRadiusNew = (xRadiusHigh - xRadiusLow) /
+(xAreaHigh.Sqrt - xAreaLow.Sqrt) *
+(xAreaTarget.Sqrt - xAreaLow.Sqrt) + xRadiusLow
+'
+' Fall back to bisection if linear interpolation stagnates. '
+if ((xRadiusNew - xRadius).Abs/(xRadiusNew + xRadius)
+<= (xTolerance/2)) then
+xRadius = (xRadiusLow + xRadiusHigh)/2
+else
+xRadius = xRadiusNew
+end
+end
+'
+'==> DEBUGGING
+'
+'MsgBox.Report(s, "Buffer algorithm trace") '
+' Check whether an answer was really found. '
+if (nIter >= nIterMax) then
+plyBuffer = Polygon.MakeNull
+end
+'
+' (You would unproject plyBuffer at this point if projecting on the fly.) '
+return plyBuffer
+' end of script
