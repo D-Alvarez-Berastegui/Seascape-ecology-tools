@@ -2,20 +2,36 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Visualizador Copernicus embebido</title>
+  <title>Visor Copernicus</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    body { margin: 0; padding: 0; }
-    iframe { width: 100%; height: 100vh; border: none; }
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #f0f0f0;
+      font-family: sans-serif;
+    }
+    a {
+      background: #0077b6;
+      color: white;
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    a:hover {
+      background: #0096c7;
+    }
   </style>
 </head>
 <body>
 
-<iframe
-  src="https://data.marine.copernicus.eu/viewer/expert?view=viewer&crs=epsg%3A4326&t=1743379200000&z=-1.0182366371154785&center=2.313069637692297%2C39.67878074176402&zoom=14.929227558600253&layers=H4sIAEt1QGgAAyWOywrCMBAA.2XPPpIqHnorWrHgoxgvIrKEdNVg0pYk1Vbx3614HQZmTm.QBcQQyNYcBmBkRy77kU26EGmCyTZZH0Umlrt9Ok.EAfPVERmbIeOTsbJkPdqqQEsF1rduqBqHsrwonI6iu8WcL4YWIxZNOR97kviUgRw_yFRKh64PvrKyoBZiNgDt07Y2ldPlFeLgGup3qqtQ0hDEF2l8D3zoDOXSBa0M_b.2OX8BancKtcYAAAA-&basemap=dark"
-  allowfullscreen
-  loading="lazy">
-</iframe>
+<a href="https://data.marine.copernicus.eu/viewer/expert?view=viewer&crs=epsg%3A4326&t=1743379200000&z=-1.0182366371154785&center=2.313069637692297%2C39.67878074176402&zoom=14.929227558600253&layers=H4sIAEt1QGgAAyWOywrCMBAA.2XPPpIqHnorWrHgoxgvIrKEdNVg0pYk1Vbx3614HQZmTm.QBcQQyNYcBmBkRy77kU26EGmCyTZZH0Umlrt9Ok.EAfPVERmbIeOTsbJkPdqqQEsF1rduqBqHsrwonI6iu8WcL4YWIxZNOR97kviUgRw_yFRKh64PvrKyoBZiNgDt07Y2ldPlFeLgGup3qqtQ0hDEF2l8D3zoDOXSBa0M_b.2OX8BancKtcYAAAA-&basemap=dark"
+   target="_blank">
+  Abrir visor Copernicus
+</a>
 
 </body>
 </html>
