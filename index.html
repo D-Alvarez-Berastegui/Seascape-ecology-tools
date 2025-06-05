@@ -14,7 +14,8 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      gap: 2rem;
+      gap: 1.5rem;
+      padding: 2rem;
     }
     a {
       text-decoration: none;
@@ -23,6 +24,8 @@
       padding: 1rem 2rem;
       border-radius: 8px;
       font-size: 1.2rem;
+      text-align: center;
+      min-width: 280px;
     }
     a:hover {
       background-color: #0a9396;
@@ -30,6 +33,10 @@
   </style>
 </head>
 <body>
+
+<a id="btn-velocity" href="#" target="_blank">
+  TUNIBAL Sea Surface Velocity
+</a>
 
 <a id="btn-temperature" href="#" target="_blank">
   TUNIBAL Sea Surface Temperature
@@ -48,10 +55,12 @@
   const base = 'https://data.marine.copernicus.eu/viewer/expert';
   const commonParams = `view=viewer&crs=epsg%3A4326&t=${timestamp}&z=-1.0182366371154785&center=2.313069637692294%2C39.67878074176403&zoom=14.929227558600253&basemap=dark`;
 
-  const layerTemp = 'H4sIAEt1QGgAAyWOywrCMBAA.2XPPpIqHnorWrHgoxgvIrKEdNVg0pYk1Vbx3614HQZmTm.QBcQQyNYcBmBkRy77kU26EGmCyTZZH0Umlrt9Ok.EAfPVERmbIeOTsbJkPdqqQEsF1rduqBqHsrwonI6iu8WcL4YWIxZNOR97kviUgRw_yFRKh64PvrKyoBZiNgDt07Y2ldPlFeLgGup3qqtQ0hDEF2l8D3zoDOXSBa0M_b.2OX8BancKtcYAAAA-';
+  const layerVelocity = 'H4sIAEGYQWgAAyWOywrCMBAA.2XPPpIqHnorWrHgoxgvIrKEdNVg0pYk1Vbx3614HQZmTm.QBcQQyNYcBmBkRy77kU26EGmCyTZZH0Umlrt9Ok.EAfPVERmbIeOTsbJkPdqqQEsF1rduqBqHsrwonI6iu8WcL4YWIxZNOR97kviUgRw_yFRKh64PvrKyoBZiNgDt07Y2ldPlFeLgGup3qqtQ0hDEF2l8D3zoDOXSBa0M_b.2OX8BancKtcYAAAA-';
+  const layerTemperature = 'H4sIAEt1QGgAAyWOywrCMBAA.2XPPpIqHnorWrHgoxgvIrKEdNVg0pYk1Vbx3614HQZmTm.QBcQQyNYcBmBkRy77kU26EGmCyTZZH0Umlrt9Ok.EAfPVERmbIeOTsbJkPdqqQEsF1rduqBqHsrwonI6iu8WcL4YWIxZNOR97kviUgRw_yFRKh64PvrKyoBZiNgDt07Y2ldPlFeLgGup3qqtQ0hDEF2l8D3zoDOXSBa0M_b.2OX8BancKtcYAAAA-';
   const layerSalinity = 'H4sIAEGaQWgAAzWNXWvCMBRA.8t91nqTtGmWtzI7VpibLHuRMS6hja4saUujww.879YHX8_Bc74v0DagYe.CwGAG3p7cWN3JqlyasqDivXjbmMq8fHyWz4X5ovXrhhAlIROLOrgQKfQNBdfQ8HuaR_vJdtua0oT.BVqz5TwQR54ytoj9NDhXXeOOoHEGbSyPg_.HttuB3o8HN_37namtd6C31scJ.Ft.cKu2Ay2yJEeFUqk0l5nk2UPaqSZUwiVH8cRUmuUo2PXnBlxagGTaAAAA';
 
-  document.getElementById('btn-temperature').href = `${base}?${commonParams}&layers=${layerTemp}`;
+  document.getElementById('btn-velocity').href = `${base}?${commonParams}&layers=${layerVelocity}`;
+  document.getElementById('btn-temperature').href = `${base}?${commonParams}&layers=${layerTemperature}`;
   document.getElementById('btn-salinity').href = `${base}?${commonParams}&layers=${layerSalinity}`;
 </script>
 
