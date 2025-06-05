@@ -29,11 +29,24 @@
 </head>
 <body>
 
-<a href="https://data.marine.copernicus.eu/viewer/expert?view=viewer&crs=epsg%3A4326&t=1743379200000&z=-1.0182366371154785&center=2.313069637692297%2C39.67878074176402&zoom=14.929227558600253&layers=H4sIAEt1QGgAAyWOywrCMBAA.2XPPpIqHnorWrHgoxgvIrKEdNVg0pYk1Vbx3614HQZmTm.QBcQQyNYcBmBkRy77kU26EGmCyTZZH0Umlrt9Ok.EAfPVERmbIeOTsbJkPdqqQEsF1rduqBqHsrwonI6iu8WcL4YWIxZNOR97kviUgRw_yFRKh64PvrKyoBZiNgDt07Y2ldPlFeLgGup3qqtQ0hDEF2l8D3zoDOXSBa0M_b.2OX8BancKtcYAAAA-&basemap=dark" 
-   target="_blank">
+<a id="copernicus-link" href="#" target="_blank">
   TUNIBAL seascape exploration tool
 </a>
 
+<script>
+  // Obtener la fecha actual en UTC a medianoche y convertir a timestamp en milisegundos
+  const now = new Date();
+  now.setUTCHours(0, 0, 0, 0);
+  const timestamp = now.getTime();
+
+  // Armar la URL del visor con fecha dinámica
+  const dynamicUrl = `https://data.marine.copernicus.eu/viewer/expert?view=viewer&crs=epsg%3A4326&t=${timestamp}&z=-1.0182366371154785&center=2.313069637692297%2C39.67878074176402&zoom=14.929227558600253&layers=H4sIAEt1QGgAAyWOywrCMBAA.2XPPpIqHnorWrHgoxgvIrKEdNVg0pYk1Vbx3614HQZmTm.QBcQQyNYcBmBkRy77kU26EGmCyTZZH0Umlrt9Ok.EAfPVERmbIeOTsbJkPdqqQEsF1rduqBqHsrwonI6iu8WcL4YWIxZNOR97kviUgRw_yFRKh64PvrKyoBZiNgDt07Y2ldPlFeLgGup3qqtQ0hDEF2l8D3zoDOXSBa0M_b.2OX8BancKtcYAAAA-&basemap=dark`;
+
+  // Asignar la URL dinámica al enlace
+  document.getElementById('copernicus-link').href = dynamicUrl;
+</script>
+
 </body>
 </html>
+
 
