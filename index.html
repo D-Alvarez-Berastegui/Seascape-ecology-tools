@@ -75,4 +75,23 @@
   const commonCenterZoom = `z=-1.0&center=18.0%2C37.0&zoom=4.5&basemap=dark`;
   const paramsVelocity = `view=viewer&crs=epsg%3A4326&t=${timestamp}&${commonCenterZoom}`;
   const paramsTemperature = `view=viewer&crs=epsg%3A4326&t=${timestamp}&${commonCenterZoom}`;
-  const paramsSalinity = `view=viewer&c
+  const paramsSalinity = `view=viewer&crs=epsg%3A4326&t=${timestamp}&${commonCenterZoom}`;
+  const paramsChla = `view=viewer&crs=epsg%3A4326&t=${chlaTimestamp}&${commonCenterZoom}`;
+  const paramsAltimetry = `view=viewer&crs=epsg%3A4326&t=${timestamp}&${commonCenterZoom}`;
+
+  // Layer IDs (sustituye los dos últimos cuando los tengas)
+  const layerVelocity = 'H4sIAEGYQWgAAyWOywrCMBAA.2XPPpIqHnorWrHgoxgvIrKEdNVg0pYk1Vbx3614HQZmTm.QBcQQyNYcBmBkRy77kU26EGmCyTZZH0Umlrt9Ok.EAfPVERmbIeOTsbJkPdqqQEsF1rduqBqHsrwonI6iu8WcL4YWIxZNOR97kviUgRw_yFRKh64PvrKyoBZiNgDt07Y2ldPlFeLgGup3qqtQ0hDEF2l8D3zoDOXSBa0M_b.2OX8BancKtcYAAAA-';
+  const layerTemperature = 'H4sIAOycQWgAAxWOyw6CMBAA.2XPIi0SD9yIYCTxQawXYsymocsjtpRATUDjv4vXOczM.QOtgggcmZ7DCrScacj_5JQmIo0xPsfHQmRif7mmu1jcMD8UyNgWGd.4pSEzorEKDSnsm9lbPCi7qsRwHTwN5jzxDAYsCDn3XUNO2iXyzjpFE0RsBe2YTr22Q9vVELnhRcuCrUUpNUFUST3S9.EDFe.vgaQAAAA-';
+  const layerSalinity = 'H4sIAEGaQWgAAzWNXWvCMBRA.8t91nqTtGmWtzI7VpibLHuRMS6hja4saUujww.879YHX8_Bc74v0DagYe.CwGAG3p7cWN3JqlyasqDivXjbmMq8fHyWz4X5ovXrhhAlIROLOrgQKfQNBdfQ8HuaR_vJdtua0oT.BVqz5TwQR54ytoj9NDhXXeOOoHEGbSyPg_.HttuB3o8HN_37namtd6C31scJ.Ft.cKu2Ay2yJEeFUqk0l5nk2UPaqSZUwiVH8cRUmuUo2PXnBlxagGTaAAAA';
+  const layerChla = 'H4sIA...REEMPLAZAR';       // Sustituir por el ID correcto
+  const layerAltimetry = 'H4sIA...REEMPLAZAR';   // Sustituir por el ID correcto
+
+  document.getElementById('btn-velocity').href = `${base}?${paramsVelocity}&layers=${layerVelocity}`;
+  document.getElementById('btn-temperature').href = `${base}?${paramsTemperature}&layers=${layerTemperature}`;
+  document.getElementById('btn-salinity').href = `${base}?${paramsSalinity}&layers=${layerSalinity}`;
+  document.getElementById('btn-chla').href = `${base}?${paramsChla}&layers=${layerChla}`;
+  document.getElementById('btn-altimetry').href = `${base}?${paramsAltimetry}&layers=${layerAltimetry}`;
+</script>
+
+</body>
+</html>
