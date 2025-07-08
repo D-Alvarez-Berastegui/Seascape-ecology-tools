@@ -46,25 +46,50 @@
   TunaMed Sea Water Salinity
 </a>
 
+<a id="btn-chla" href="#" target="_blank">
+  TunaMed Chlorophyll‑a (CHL)
+</a>
+
+<a id="btn-altimetry" href="#" target="_blank">
+  TunaMed Sea Surface Height (Altimetry)
+</a>
+
 <script>
-  // Obtener la fecha actual en UTC a medianoche
+  // Base del visor
+  const base = 'https://data.marine.copernicus.eu/viewer/expert';
+
+  // Fecha actual UTC a medianoche
   const now = new Date();
   now.setUTCHours(0, 0, 0, 0);
   const timestamp = now.getTime();
 
-  const base = 'https://data.marine.copernicus.eu/viewer/expert';
+  // Fecha CHL: actual - 4 días
+  const chlaDate = new Date(now);
+  chlaDate.setUTCDate(chlaDate.getUTCDate() - 4);
+  const chlaTimestamp = chlaDate.getTime();
 
+  // Parámetros de cada producto
   const paramsVelocity = `view=viewer&crs=epsg%3A4326&t=${timestamp}&z=-1.0182366371154785&center=2.313069637692294%2C39.67878074176403&zoom=14.929227558600253&basemap=dark`;
   const paramsTemperature = `view=viewer&crs=epsg%3A4326&t=${timestamp}&z=-1.0182366371154785&center=-0.5893692355859187%2C38.53520205554576&zoom=14.521227558600254&basemap=dark`;
   const paramsSalinity = `view=viewer&crs=epsg%3A4326&t=${timestamp}&z=-1.0182366371154785&center=2.313069637692294%2C39.67878074176403&zoom=14.929227558600253&basemap=dark`;
+  const paramsChla = `view=viewer&crs=epsg%3A4326&t=${chlaTimestamp}&z=-1.0&center=2.5%2C38.7&zoom=6&basemap=dark`;
+  const paramsAltimetry = `view=viewer&crs=epsg%3A4326&t=${timestamp}&z=-1.0&center=2.5%2C38.7&zoom=6&basemap=dark`;
 
+  // Layer IDs (comprimidos) de cada producto
   const layerVelocity = 'H4sIAEGYQWgAAyWOywrCMBAA.2XPPpIqHnorWrHgoxgvIrKEdNVg0pYk1Vbx3614HQZmTm.QBcQQyNYcBmBkRy77kU26EGmCyTZZH0Umlrt9Ok.EAfPVERmbIeOTsbJkPdqqQEsF1rduqBqHsrwonI6iu8WcL4YWIxZNOR97kviUgRw_yFRKh64PvrKyoBZiNgDt07Y2ldPlFeLgGup3qqtQ0hDEF2l8D3zoDOXSBa0M_b.2OX8BancKtcYAAAA-';
   const layerTemperature = 'H4sIAOycQWgAAxWOyw6CMBAA.2XPIi0SD9yIYCTxQawXYsymocsjtpRATUDjv4vXOczM.QOtgggcmZ7DCrScacj_5JQmIo0xPsfHQmRif7mmu1jcMD8UyNgWGd.4pSEzorEKDSnsm9lbPCi7qsRwHTwN5jzxDAYsCDn3XUNO2iXyzjpFE0RsBe2YTr22Q9vVELnhRcuCrUUpNUFUST3S9.EDFe.vgaQAAAA-';
   const layerSalinity = 'H4sIAEGaQWgAAzWNXWvCMBRA.8t91nqTtGmWtzI7VpibLHuRMS6hja4saUujww.879YHX8_Bc74v0DagYe.CwGAG3p7cWN3JqlyasqDivXjbmMq8fHyWz4X5ovXrhhAlIROLOrgQKfQNBdfQ8HuaR_vJdtua0oT.BVqz5TwQR54ytoj9NDhXXeOOoHEGbSyPg_.HttuB3o8HN_37namtd6C31scJ.Ft.cKu2Ay2yJEeFUqk0l5nk2UPaqSZUwiVH8cRUmuUo2PXnBlxagGTaAAAA';
 
+  // 🔴 Sustituye los siguientes IDs por los correctos desde el visor:
+  const layerChla = 'H4sIA...REEMPLAZAR_POR_ID_REAL';
+  const layerAltimetry = 'H4sIA...REEMPLAZAR_POR_ID_REAL';
+
+  // Asignación de href dinámico
   document.getElementById('btn-velocity').href = `${base}?${paramsVelocity}&layers=${layerVelocity}`;
   document.getElementById('btn-temperature').href = `${base}?${paramsTemperature}&layers=${layerTemperature}`;
   document.getElementById('btn-salinity').href = `${base}?${paramsSalinity}&layers=${layerSalinity}`;
+  document.getElementById('btn-chla').href = `${base}?${paramsChla}&layers=${layerChla}`;
+  document.getElementById('btn-altimetry').href = `${base}?${paramsAltimetry}&layers=${layerAltimetry}`;
 </script>
 
 </body>
