@@ -50,8 +50,8 @@
 </head>
 <body>
 
-<h1> Mediterranean oceanography visualization of Esential Ocean Variables of interest for large pelagic species</h1>
-<p>Initative (more at: TunaMed https://oostop.wixsite.com/tunamed) </p>
+<h1>Mediterranean oceanography visualization of Essential Ocean Variables of interest for large pelagic species</h1>
+<p>Initiative: <a href="https://oostop.wixsite.com/tunamed" target="_blank">TunaMed</a></p>
 <p>Select an ocean variable to open the Copernicus Marine Service</p>
 
 <a id="btn-velocity" href="#" target="_blank">Sea Surface Velocity</a>
@@ -63,30 +63,36 @@
 <script>
   const base = 'https://data.marine.copernicus.eu/viewer/expert';
 
-  // Fechas
   const now = new Date();
   now.setUTCHours(0, 0, 0, 0);
   const timestamp = now.getTime();
 
+  // CHL delay de 4 días
   const chlaDate = new Date(now);
   chlaDate.setUTCDate(chlaDate.getUTCDate() - 4);
   const chlaTimestamp = chlaDate.getTime();
 
-  // Parámetros centrados en el Mediterráneo
+  // Altimetría delay de 2 días
+  const altimetryDate = new Date(now);
+  altimetryDate.setUTCDate(altimetryDate.getUTCDate() - 2);
+  const altimetryTimestamp = altimetryDate.getTime();
+
   const commonCenterZoom = `z=-1.0&center=9.131951621388636%2C34.843972166025175&zoom=12.138918481109998&basemap=dark`;
+
   const paramsVelocity = `view=viewer&crs=epsg%3A4326&t=${timestamp}&${commonCenterZoom}`;
   const paramsTemperature = `view=viewer&crs=epsg%3A4326&t=${timestamp}&${commonCenterZoom}`;
   const paramsSalinity = `view=viewer&crs=epsg%3A4326&t=${timestamp}&${commonCenterZoom}`;
   const paramsChla = `view=viewer&crs=epsg%3A4326&t=${chlaTimestamp}&${commonCenterZoom}`;
-  const paramsAltimetry = `view=viewer&crs=epsg%3A4326&t=${timestamp}&${commonCenterZoom}`;
+  const paramsAltimetry = `view=viewer&crs=epsg%3A4326&t=${altimetryTimestamp}&${commonCenterZoom}`;
 
-  // Layer IDs (sustituye los dos últimos cuando los tengas)
+  // Layer IDs
   const layerVelocity = 'H4sIAEGYQWgAAyWOywrCMBAA.2XPPpIqHnorWrHgoxgvIrKEdNVg0pYk1Vbx3614HQZmTm.QBcQQyNYcBmBkRy77kU26EGmCyTZZH0Umlrt9Ok.EAfPVERmbIeOTsbJkPdqqQEsF1rduqBqHsrwonI6iu8WcL4YWIxZNOR97kviUgRw_yFRKh64PvrKyoBZiNgDt07Y2ldPlFeLgGup3qqtQ0hDEF2l8D3zoDOXSBa0M_b.2OX8BancKtcYAAAA-';
   const layerTemperature = 'H4sIAOycQWgAAxWOyw6CMBAA.2XPIi0SD9yIYCTxQawXYsymocsjtpRATUDjv4vXOczM.QOtgggcmZ7DCrScacj_5JQmIo0xPsfHQmRif7mmu1jcMD8UyNgWGd.4pSEzorEKDSnsm9lbPCi7qsRwHTwN5jzxDAYsCDn3XUNO2iXyzjpFE0RsBe2YTr22Q9vVELnhRcuCrUUpNUFUST3S9.EDFe.vgaQAAAA-';
   const layerSalinity = 'H4sIAEGaQWgAAzWNXWvCMBRA.8t91nqTtGmWtzI7VpibLHuRMS6hja4saUujww.879YHX8_Bc74v0DagYe.CwGAG3p7cWN3JqlyasqDivXjbmMq8fHyWz4X5ovXrhhAlIROLOrgQKfQNBdfQ8HuaR_vJdtua0oT.BVqz5TwQR54ytoj9NDhXXeOOoHEGbSyPg_.HttuB3o8HN_37namtd6C31scJ.Ft.cKu2Ay2yJEeFUqk0l5nk2UPaqSZUwiVH8cRUmuUo2PXnBlxagGTaAAAA';
-  const layerChla = 'H4sIA...REEMPLAZAR';       // Sustituir por el ID correcto
-  const layerAltimetry = 'H4sIA...REEMPLAZAR';   // Sustituir por el ID correcto
+  const layerChla = 'H4sIACTofGgAA23QXUvDMBSA4f_S69U13RDsXe2qG9R1tPNiiByyJOvK8lGSVFdH.7upE1Tw9nDgvM95uSDtjtykWhtmUXwZJqhhKEaOyxajCRKk52Y1Tp6yRZUlkKyTfFetqoeizNKk2sJmuYMwvIUQz6ZUcmlBagaSM2iPfUA7A0QdKMxvopOEDV4EEqIwmmM8tZzAO3HcwBsXmjau9wc.VorxM4pDH2Kzcyu0aVSNYmc67nN0XVEiOIoPRFg.aOyyYYyr68Iw_cfzQyjSLFmnRV48l_A5cP_YQj6Ddbn1gjvAc.wt0HsbaPqF2Nc0aAVRJ6cVKONAzALZCdcE_OoZNZHXpMv8Vz4e_8ebIMLxjX_7h9dPlQbVnXkBAAA-';
+  const layerAltimetry = 'H4sIAKrpfGgAA6XQ0WrCMBiG4XvJsdGkVtl61tVuCp0V6wYyxk9sYi2mTWnSTSfe_1J1KGxnOw2B.3m.twNSZiPqQKmaa_Qdjh2Uc_QhI4qKog6SbC.qSfvyHI6S0Ad.6kfLZJI8xvMw8JMFzMZLIGQIhPZ7aSEKDYXiUAgO1WaP06YGVq5TcLvOtoAZHeECHOK4lPa0YPDJjKjhQ0iV5mZvD35NSi52yCMWosNdJVWdlxnyTN0Iy1FZkjIpkLdmUtuHXI9zzkV5.nDs.NFzTYiD0J8GcRS.zMHmwMNTAFEfpvOFLbgH6tJLgVpprNJTxCpLcSVZuTWqhLI2IPu4aKTJMT33tDWOrQnG0Q2ftv72JkjSzvgvt909Cl.DCEILb.eO3Av6DsiQ3KC1BGEXb5fXenPyMik1M1i6mDcs1Zh0ydAZcJH94Adk2GPc3OCdK975jT__fwNyVvBKNgIAAA--';
 
+  // Asignar URLs a los botones
   document.getElementById('btn-velocity').href = `${base}?${paramsVelocity}&layers=${layerVelocity}`;
   document.getElementById('btn-temperature').href = `${base}?${paramsTemperature}&layers=${layerTemperature}`;
   document.getElementById('btn-salinity').href = `${base}?${paramsSalinity}&layers=${layerSalinity}`;
